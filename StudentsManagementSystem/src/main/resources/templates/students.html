@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+          crossorigin="anonymous">
+</head>
+<body class="container mt-4">
+
+    <!-- ✅ Navbar -->
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Student Management System</a>
+    </nav>
+
+    <!-- ✅ Add Student Button (Left Side) -->
+    <div class="d-flex justify-content-start mt-4 mb-3">
+        <a class="btn btn-primary" th:href="@{students/new}">Add Student</a>
+    </div>
+
+    <!-- ✅ Table -->
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Student First Name</th>
+                <th>Student Last Name</th>
+                <th>Student Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.firstName}"></td>
+                <td th:text="${student.lastName}"></td>
+                <td th:text="${student.email}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ✅ Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
