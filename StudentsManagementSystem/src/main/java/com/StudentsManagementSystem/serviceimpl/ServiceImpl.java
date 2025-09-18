@@ -21,4 +21,17 @@ return list;
 public Student saveStudent(Student student) {
 	return Studentrepository.save(student);
 }
+
+
+@Override
+public Student getById(int id) {
+	
+	return Studentrepository.findById(id).get();
+}
+@Override
+public void deleteById(int id) {
+	Studentrepository.deleteById(id);
+	
+}
+
 }

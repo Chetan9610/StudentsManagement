@@ -7,38 +7,100 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
           crossorigin="anonymous">
+
+    <style>
+        .app-header {
+            background: #343a40;
+            color: #fff;
+            padding: 16px 20px;
+            text-align: center;
+        }
+        .brand {
+            font-size: 32px; /* Student List ke barabar */
+            font-weight: 700;
+        }
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .btn-add {
+            background-color: #1687ff;
+            border-color: #1687ff;
+            color: #fff;
+        }
+        /* Table headers same color as top header */
+        .table thead th {
+            background-color: #343a40;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        /* Add vertical lines */
+        .table th, .table td {
+            border-right: 1px solid #dee2e6;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .table th:last-child, .table td:last-child {
+            border-right: none;
+        }
+    </style>
 </head>
-<body class="container mt-4">
+<body>
 
-    <!-- ✅ Navbar -->
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Student Management System</a>
-    </nav>
+    <!-- Top Header -->
+    <header class="app-header">
+        <div class="brand">Student Management System</div>
+    </header>
 
-    <!-- ✅ Add Student Button (Left Side) -->
-    <div class="d-flex justify-content-start mt-4 mb-3">
-        <a class="btn btn-primary" th:href="@{students/new}">Add Student</a>
-    </div>
+    <main class="container mt-4">
+        <!-- Add Student Button -->
+        <div class="mb-3 text-left">
+            <a class="btn btn-add btn-sm px-3" th:href="@{/students/new}">Add Student</a>
+        </div>
 
-    <!-- ✅ Table -->
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Student First Name</th>
-                <th>Student Last Name</th>
-                <th>Student Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="student : ${students}">
-                <td th:text="${student.firstName}"></td>
-                <td th:text="${student.lastName}"></td>
-                <td th:text="${student.email}"></td>
-            </tr>
-        </tbody>
-    </table>
+        <!-- Student List Title -->
+        <div class="col-12 text-center mb-3">
+            <h1 class="page-title">Student List</h1>
+        </div>
 
-    <!-- ✅ Bootstrap JS -->
+        <!-- Student Table -->
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="student : ${students}">
+                                    <td th:text="${student.firstName}">First</td>
+                                    <td th:text="${student.lastName}">Last</td>
+                                    <td th:text="${student.email}">email@example.com</td>
+                                    <td>
+                                        <a th:href="@{students/edit/{id}(id=${student.id})}" 
+                                           class="btn btn-sm btn-info mr-2">Update</a>
+                                        <a th:href="@{students/{id}(id=${student.id})}" 
+                                           class="btn btn-sm btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
 
